@@ -1,0 +1,6 @@
+export influx_user="admin"
+export influx_password="admin"
+export influx_token="token"
+export influx_bucket="bucket_name"
+export influx_org="org_name"
+export influx_url="server_ip:8086"
