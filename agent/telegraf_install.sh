@@ -13,8 +13,15 @@ https://repos.influxdata.com/influxdata-archive.key \
 # Update package lists and install telegraf
 sudo apt-get update && sudo apt-get install telegraf
 
-# Copy configuration files
-sudo cp ./config/telegraf  /etc/default/telegraf
+# Copy telegraf configuration files
+sudo tee /etc/default/telegraf > /dev/null <<EOF
+influx_user=$influx_user
+influx_password=$influx_password
+influx_token=$influx_token
+influx_bucket=$influx_bucket
+influx_org=$influx_org
+influx_url=$influx_url
+EOF
 sudo cp ./config/telegraf_agent.conf /etc/telegraf/telegraf.conf
 
 # Start and enable telegraf service
