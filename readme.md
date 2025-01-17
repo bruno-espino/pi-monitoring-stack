@@ -27,4 +27,5 @@ Execute the main setup script and choose Agent or Server setup:
 
 Once the setup is complete, you can access a pre-configured Grafana dashboard for Raspberry Pi monitoring. This dashboard provides visual insights into key system metrics such as CPU usage, memory utilization, disk space, and more.
 
+![Dashboard](./dashboard.png)
 Communtiy dashboard can be found at: https://grafana.com/grafana/dashboards/10578-raspberry-pi-monitoring/
