@@ -1,7 +1,13 @@
 #!/bin/bash
 
 # Set env variables
-source ./config/variables.sh
+admin_pwd_len=$(cat ./config/variables.sh | grep password | awk -F '=' '{print $2}' | tr -d '\n' | wc -m)
+if [[ $admin_pwd_len -le 10 ]]; then
+    echo "Admin password must have at least 8 chars"
+    exit 1
+else
+    source ./config/variables.sh
+fi
 
 show_menu() {
     echo
