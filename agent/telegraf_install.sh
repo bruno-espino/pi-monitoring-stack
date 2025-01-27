@@ -11,7 +11,7 @@ https://repos.influxdata.com/influxdata-archive.key \
 | sudo tee /etc/apt/sources.list.d/influxdata.list
 
 # Update package lists and install telegraf
-sudo apt-get update && sudo apt-get install telegraf
+sudo apt-get update && sudo apt-get install -y telegraf
 
 # Copy telegraf configuration files
 sudo tee /etc/default/telegraf > /dev/null <<EOF

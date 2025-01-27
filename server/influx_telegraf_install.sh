@@ -11,7 +11,7 @@ https://repos.influxdata.com/influxdata-archive.key \
 | sudo tee /etc/apt/sources.list.d/influxdata.list
 
 # Update package lists and install telegraf/influxdb
-sudo apt-get update && sudo apt-get install telegraf influxdb2
+sudo apt-get update && sudo apt-get install -y telegraf influxdb2
 
 # Enable and start the influxdb service
 sudo systemctl enable influxdb 

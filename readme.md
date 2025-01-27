@@ -25,7 +25,9 @@ Execute the main setup script and choose Agent or Server setup:
 ```
 
 
-Once the setup is complete, you can access a pre-configured Grafana dashboard for Raspberry Pi monitoring. This dashboard provides visual insights into key system metrics such as CPU usage, memory utilization, disk space, and more.
+Once the setup is complete, you can access a pre-configured Grafana dashboard for Raspberry Pi monitoring at ```<SERVER_IP>:3000``` (or ```localhost:3000``` if accessing from the server). Default grafana credentials are ```admin/admin```.
+
+This dashboard provides visual insights into key system metrics such as CPU usage, memory utilization, disk space, temperature and more.
 
 ![Dashboard](./dashboard.png)
 Communtiy dashboard can be found at: https://grafana.com/grafana/dashboards/10578-raspberry-pi-monitoring/
