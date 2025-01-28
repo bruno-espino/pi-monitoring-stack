@@ -53,7 +53,7 @@ sudo sed -i "/default_home_dashboard_path/s/.*/default_home_dashboard_path = \/v
 pip install bcrypt
 HASHED_PASSWORD=$(python3 -c "import bcrypt; print(bcrypt.hashpw(b'$password', bcrypt.gensalt()).decode())")  # Generar la contraseña hasheada con bcrypt
 
-sqlite3 /var/lib/grafana/grafana.db <<EOF
+sudo sqlite3 /var/lib/grafana/grafana.db <<EOF
 INSERT INTO user (login, email, password, isAdmin, isActive, created, updated)
 VALUES ('$user', 'admin@example.com', '$HASHED_PASSWORD', 1, 1, datetime('now'), datetime('now'));
 EOF
