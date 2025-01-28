@@ -25,7 +25,7 @@ datasources:
     access: proxy
     orgId: 1
     uid: 10001
-    url: http://$influx_server
+    url: http://$influx_server:$influx_port
     jsonData:
       version: Flux
       organization: $influx_org
