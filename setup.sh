@@ -11,14 +11,14 @@ else
     
     grafana_free_port=$(sudo netstat -plnt | grep ":$grafana_port" | awk '{print $7}')
     if [[ "${#grafana_free_port}" -gt 0 ]]; then
-        echo "The port assigned for Grafana is already in use by: $grafana_free_port (PID/Program name)"
+        echo "The port $grafana_port assigned to Grafana is already in use by: $grafana_free_port (PID/Program name)"
         echo "Change the value of grafana_port on './config/variables.sh' or kill the running process."
         exit 1
     fi
 
     infulx_free_port=$(sudo netstat -plnt | grep ":$influx_port" | awk '{print $7}')
     if [[ "${#infulx_free_port}" -gt 0 ]]; then
-        echo "The port assigned for InfluxDB is already in use by: $infulx_free_port (PID/Program name)"
+        echo "The port $influx_port assigned to InfluxDB is already in use by: $infulx_free_port (PID/Program name)"
         echo "Change the value of influx_port on './config/variables.sh' or kill the running process."
         exit 1
     fi
