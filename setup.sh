@@ -9,7 +9,7 @@ if [[ $admin_pwd_len -le 11 ]]; then
 else
     source ./config/variables.sh
     echo "install dependencies"
-    apt-get install -y sudo wget gpg curl
+    sudo apt-get install -y wget gpg curl
 fi
 
 show_menu() {
