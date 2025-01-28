@@ -7,7 +7,8 @@ sudo mkdir -p /etc/apt/keyrings/
 wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
 
 # Add stable releases repo
-echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+grafana_repo="deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main"
+grep -q "$grafana_repo" /etc/apt/sources.list.d/grafana.list || echo "$grafana_repo" | sudo tee -a /etc/apt/sources.list.d/grafana.list
 
 # Updates the list of available packages
 sudo apt-get update
