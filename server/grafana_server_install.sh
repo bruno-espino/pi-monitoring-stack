@@ -54,8 +54,13 @@ pip install bcrypt
 HASHED_PASSWORD=$(python3 -c "import bcrypt; print(bcrypt.hashpw(b'$password', bcrypt.gensalt()).decode())")  # Generar la contraseña hasheada con bcrypt
 
 sudo sqlite3 /var/lib/grafana/grafana.db <<EOF
-INSERT INTO user (login, email, password, isAdmin, isActive, created, updated)
-VALUES ('$user', 'admin@example.com', '$HASHED_PASSWORD', 1, 1, datetime('now'), datetime('now'));
+INSERT INTO user (login, email, password, isActive, created, updated)
+VALUES ('$user', 'admin@example.com', '$HASHED_PASSWORD', 1, datetime('now'), datetime('now'));
+EOF
+
+sqlite3 $GRAFANA_DB_PATH <<EOF
+INSERT INTO org_role (user_id, org_id, role)
+VALUES (1, 1, 'Admin');
 EOF
 
 sudo systemctl restart grafana-server
