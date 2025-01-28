@@ -7,8 +7,7 @@ sudo mkdir -p /etc/apt/keyrings/
 wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
 
 # Add stable releases repo
-grafana_repo="deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main"
-grep -q "$grafana_repo" /etc/apt/sources.list.d/grafana.list || echo "$grafana_repo" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
 
 # Updates the list of available packages
 sudo apt-get update
@@ -45,12 +44,20 @@ sudo cp ./server/pi_metrics.json  /var/lib/grafana/dashboards/pi_metrics.json
 sudo systemctl daemon-reload
 sudo systemctl enable grafana-server
 
-sudo sed -i "/disable_initial_admin_creation/s/.*/disable_initial_admin_creation = true/" /etc/grafana/grafana.ini
-sudo sed -i "/admin_user/s/.*/admin_user = $user/" /etc/grafana/grafana.ini
-sudo sed -i "/admin_password/s/.*/admin_password = admin/" /etc/grafana/grafana.ini
+# sudo sed -i "/disable_initial_admin_creation/s/.*/disable_initial_admin_creation = true/" /etc/grafana/grafana.ini
+# sudo sed -i "/admin_user/s/.*/admin_user = $user/" /etc/grafana/grafana.ini
+# sudo sed -i "/admin_password/s/.*/admin_password = admin/" /etc/grafana/grafana.ini
 sudo sed -i "/http_port/s/.*/http_port = $grafana_port/" /etc/grafana/grafana.ini
 sudo sed -i "/default_home_dashboard_path/s/.*/default_home_dashboard_path = \/var\/lib\/grafana\/dashboards\/pi_metrics.json/" /etc/grafana/grafana.ini
 
+pip install bcrypt
+HASHED_PASSWORD=$(python3 -c "import bcrypt; print(bcrypt.hashpw(b'$password', bcrypt.gensalt()).decode())")  # Generar la contraseña hasheada con bcrypt
+
+sqlite3 /var/lib/grafana/grafana.db <<EOF
+INSERT INTO user (login, email, password, isAdmin, isActive, created, updated)
+VALUES ('$user', 'admin@example.com', '$HASHED_PASSWORD', 1, 1, datetime('now'), datetime('now'));
+EOF
+
 sudo systemctl restart grafana-server
 
-sudo grafana-cli admin reset-admin-password $password
+# sudo grafana-cli admin reset-admin-password $password
