@@ -34,7 +34,7 @@ influx_password=$password
 influx_token=$influx_token
 influx_bucket=$influx_bucket
 influx_org=$influx_org
-influx_url=$influx_server
+influx_url=$influx_server:$influx_port
 EOF
 sudo cp ./config/telegraf_server.conf /etc/telegraf/telegraf.conf
 
