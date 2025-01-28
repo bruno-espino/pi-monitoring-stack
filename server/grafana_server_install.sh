@@ -43,7 +43,10 @@ sudo cp ./server/pi_metrics.json  /var/lib/grafana/dashboards/pi_metrics.json
 # Start and enable grafana service
 sudo systemctl daemon-reload
 sudo systemctl enable grafana-server
+
+sudo sed -i "/disable_initial_admin_creation/s/.*/disable_initial_admin_creation = true/" /etc/grafana/grafana.ini
 sudo sed -i "/admin_user/s/.*/admin_user = $user/" /etc/grafana/grafana.ini
+sudo sed -i "/admin_password/s/.*/admin_password = admin/" /etc/grafana/grafana.ini
 sudo sed -i "/http_port/s/.*/http_port = $grafana_port/" /etc/grafana/grafana.ini
 sudo sed -i "/default_home_dashboard_path/s/.*/default_home_dashboard_path = \/var\/lib\/grafana\/dashboards\/pi_metrics.json/" /etc/grafana/grafana.ini
 
