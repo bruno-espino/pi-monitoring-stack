@@ -18,10 +18,10 @@ sudo systemctl enable influxdb
 sudo systemctl start influxdb 
 
 # influxdb setup, vars at config/telegraf
-curl http://localhost:8086/api/v2/setup \
+curl http://$influx_url/api/v2/setup \
   --data "{
-    \"username\": \"$influx_user\",
-    \"password\": \"$influx_password\",
+    \"username\": \"$user\",
+    \"password\": \"$password\",
     \"token\": \"$influx_token\",
     \"bucket\": \"$influx_bucket\",
     \"org\": \"$influx_org\"
@@ -34,7 +34,7 @@ influx_password=$influx_password
 influx_token=$influx_token
 influx_bucket=$influx_bucket
 influx_org=$influx_org
-influx_url=localhost:8086
+influx_url=$influx_url
 EOF
 sudo cp ./config/telegraf_server.conf /etc/telegraf/telegraf.conf
 
