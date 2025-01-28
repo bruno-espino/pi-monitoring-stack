@@ -25,7 +25,7 @@ datasources:
     access: proxy
     orgId: 1
     uid: 10001
-    url: http://$influx_url
+    url: http://$influx_server
     jsonData:
       version: Flux
       organization: $influx_org
@@ -44,3 +44,5 @@ sudo cp ./server/pi_metrics.json  /var/lib/grafana/dashboards/pi_metrics.json
 sudo systemctl daemon-reload
 sudo systemctl enable grafana-server
 sudo systemctl start grafana-server
+
+sudo grafana-cli admin reset-admin-password $password
