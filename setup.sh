@@ -33,6 +33,7 @@ show_menu() {
     echo "1) Agent"
     echo "2) Server"
     echo "3) Exit"
+    echo "9) Nuke it"
     echo
 }
 
@@ -70,6 +71,10 @@ while true; do
             2)
                 echo "Running Server setup"
                 run_scripts "server"
+                ;;
+            9)
+                echo "Uninstalling and removing all assets"
+                # run_scripts "uninstall"
                 ;;
             *)
                 echo "Invalid option"
