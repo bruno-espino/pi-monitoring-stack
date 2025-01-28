@@ -8,6 +8,8 @@ if [[ $admin_pwd_len -le 11 ]]; then
     exit 1
 else
     source ./config/variables.sh
+    echo "install dependencies"
+    apt-get install -y sudo wget gpg curl
 fi
 
 show_menu() {
