@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 sudo apt-get install -y apt-transport-https software-properties-common wget
 
@@ -40,16 +41,14 @@ sudo cp ./server/pi_provider.yaml  /etc/grafana/provisioning/dashboards/pi_provi
 sudo mkdir -p /var/lib/grafana/dashboards
 sudo cp ./server/pi_metrics.json  /var/lib/grafana/dashboards/pi_metrics.json
 
-# Start and enable grafana service
 sudo systemctl daemon-reload
 sudo systemctl enable grafana-server
-sudo systemctl stop grafana-server
 
+sudo sed -i "/admin_user/s/.*/admin_user = $user/" /etc/grafana/grafana.ini
 sudo sed -i "/http_port/s/.*/http_port = $grafana_port/" /etc/grafana/grafana.ini
 sudo sed -i "/default_home_dashboard_path/s/.*/default_home_dashboard_path = \/var\/lib\/grafana\/dashboards\/pi_metrics.json/" /etc/grafana/grafana.ini
 
-sudo sqlite3 /var/lib/grafana/grafana.db "UPDATE user SET login='$user' WHERE id='1';"
 
 sudo systemctl restart grafana-server
-
-sudo grafana-cli admin reset-admin-password $password
+sleep 5
+(sudo grafana-cli admin reset-admin-password $password)

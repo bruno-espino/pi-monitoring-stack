@@ -19,8 +19,8 @@ remove_server() {
     sudo apt-get remove -y telegraf influxdb2 grafana
 
     sudo rm -rf /var/lib/influxdb /var/log/influxdb
-    sudo rm -rf /var/lib/telegraf /etc/telegraf
-    sudo rm -rf /var/lib/grafana /etc/grafana /var/log/grafana 
+    sudo rm -rf /var/lib/telegraf /etc/telegraf /etc/default/telegraf
+    sudo rm -rf /var/lib/grafana /etc/grafana /var/log/grafana /etc/apt/sources.list.d/grafana.list
 }
 
 
