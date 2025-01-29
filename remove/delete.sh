@@ -3,7 +3,8 @@ show_menu() {
     echo "Select Agent or Server to remove"
     echo "1) Agent"
     echo "2) Server"
-    echo "3) Exit"
+    echo ""
+    echo "3) Back"
     echo
 }
 
@@ -29,7 +30,6 @@ while true; do
     read -p "Enter your choices: " -a choices
 
     if [[ " ${choices[@]} " =~ " 3 " ]]; then
-        echo "Exiting..."
         break
     fi
 
@@ -42,10 +42,6 @@ while true; do
             2)
                 echo "Remove Server setup"
                 remove_server
-                ;;
-            # 3)
-            #     echo "Back"
-            #     bash ../setup.sh
                 ;;
             *)
                 echo "Invalid option"

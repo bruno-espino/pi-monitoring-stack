@@ -32,7 +32,9 @@ show_menu() {
     echo "Select Agent or Server setup"
     echo "1) Agent"
     echo "2) Server"
+    echo ""
     echo "3) Exit"
+    echo ""
     echo "9) Nuke it"
     echo
 }
