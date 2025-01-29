@@ -53,27 +53,3 @@ sudo sqlite3 /var/lib/grafana/grafana.db "UPDATE user SET login='$user' WHERE id
 sudo systemctl restart grafana-server
 
 sudo grafana-cli admin reset-admin-password $password
-
-1|0|admin|admin@localhost||128f686e84581ce110443789b|m7LAGMr5XJ|SS3n9L9y2M||1|1|0||2025-01-29 03:29:53|2025-01-29 03:29:53|0|2015-01-29 02:29:53|0|0|debezl1ntm8zk
-1|0|admin|admin@localhost||e728ec82cf71208dbaaf6f4ee|m7LAGMr5XJ|SS3n9L9y2M||1|1|0||2025-01-29 03:29:53|2025-01-29 03:54:04|0|2025-01-29 03:54:04|0|0|debezl1ntm8zkf
-
-0|id|INTEGER|1||1                         1|
-1|version|INTEGER|1||0                    0|
-2|login|TEXT|1||0                         admin|
-3|email|TEXT|1||0                         admin@localhost|
-4|name|TEXT|0||0                          |
-5|password|TEXT|0||0                      128f686e84581ce110443789b|
-6|salt|TEXT|0||0                          m7LAGMr5XJ|
-7|rands|TEXT|0||0                         SS3n9L9y2M|
-8|company|TEXT|0||0                       |
-9|org_id|INTEGER|1||0                     1|
-10|is_admin|INTEGER|1||0                  1|            
-11|email_verified|INTEGER|0||0            0|
-12|theme|TEXT|0||0                        |
-13|created|DATETIME|1||0                  2025-01-29 03:29:53|
-14|updated|DATETIME|1||0                  2025-01-29 03:29:53|
-15|help_flags1|INTEGER|1|0|0              0|
-16|last_seen_at|DATETIME|0||0             2015-01-29 02:29:53|
-17|is_disabled|INTEGER|1|0|0              0|
-18|is_service_account|BOOLEAN|0|0|0       0|
-19|uid|TEXT|0||0                          debezl1ntm8zk
