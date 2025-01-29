@@ -74,7 +74,7 @@ while true; do
                 ;;
             9)
                 echo "Uninstalling and removing all assets"
-                # run_scripts "uninstall"
+                run_scripts "remove"
                 ;;
             *)
                 echo "Invalid option"
