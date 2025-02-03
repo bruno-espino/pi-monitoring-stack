@@ -15,14 +15,13 @@ sudo apt-get update && sudo apt-get install -y telegraf
 
 # Copy telegraf configuration files
 sudo tee /etc/default/telegraf > /dev/null <<EOF
-influx_user=$influx_user
-influx_password=$influx_password
 influx_token=$influx_token
 influx_bucket=$influx_bucket
 influx_org=$influx_org
-influx_url=$influx_url
+influx_server=$influx_server
+influx_port=$influx_port
 EOF
-sudo cp ./config/telegraf_agent.conf /etc/telegraf/telegraf.conf
+sudo cp ./config/telegraf.conf /etc/telegraf/telegraf.conf
 
 # Start and enable telegraf service
 sudo systemctl enable telegraf
