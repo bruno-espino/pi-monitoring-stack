@@ -11,7 +11,7 @@ show_menu() {
 remove_agent() {
     sudo systemctl stop telegraf.service
     sudo apt-get remove -y telegraf
-    sudo rm -rf /var/lib/telegraf /etc/telegraf
+    sudo rm -rf /var/lib/telegraf /etc/telegraf /etc/default/telegraf /etc/apt/sources.list.d/influxdata.list
 }
 
 remove_server() {
@@ -19,7 +19,7 @@ remove_server() {
     sudo apt-get remove -y telegraf influxdb2 grafana
 
     sudo rm -rf /var/lib/influxdb /var/log/influxdb
-    sudo rm -rf /var/lib/telegraf /etc/telegraf /etc/default/telegraf
+    sudo rm -rf /var/lib/telegraf /etc/telegraf /etc/default/telegraf /etc/apt/sources.list.d/influxdata.list
     sudo rm -rf /var/lib/grafana /etc/grafana /var/log/grafana /etc/apt/sources.list.d/grafana.list
 }
 
