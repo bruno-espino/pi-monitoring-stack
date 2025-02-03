@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 sudo apt-get install -y apt-transport-https software-properties-common wget
 
@@ -48,7 +47,4 @@ sudo sed -i "/admin_user/s/.*/admin_user = $user/" /etc/grafana/grafana.ini
 sudo sed -i "/http_port/s/.*/http_port = $grafana_port/" /etc/grafana/grafana.ini
 sudo sed -i "/default_home_dashboard_path/s/.*/default_home_dashboard_path = \/var\/lib\/grafana\/dashboards\/pi_metrics.json/" /etc/grafana/grafana.ini
 
-
 sudo systemctl restart grafana-server
-sleep 5
-(sudo grafana-cli admin reset-admin-password $password)
