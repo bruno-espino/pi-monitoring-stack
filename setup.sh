@@ -2,6 +2,7 @@
 
 # Set env variables
 admin_pwd_len=$(cat ./config/variables.sh | grep password | awk -F '=' '{print $2}' | tr -d '\n' | wc -m)
+
 if [[ $admin_pwd_len -le 11 ]]; then
     echo "Admin password must have at least 9 chars."
     echo "Edit './config/variables.sh' file."
@@ -29,6 +30,13 @@ else
     
     echo "Installing dependencies"
     sudo apt-get install -y wget gpg curl
+
+if [[ $admin_pwd_len -lt 10 ]]; then
+    echo "Admin password must have at least 8 chars"
+    exit 1
+else
+    source ./config/variables.sh
+
 fi
 
 show_menu() {
