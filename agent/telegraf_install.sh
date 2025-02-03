@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $influx_server == "localhost" ]]; then
+    echo "Tha variable 'influx_server' on './config/variables.sh' can't be 'localhost'."
+    echo "You must enter the IP or FQDN were your influx server is running."
+    exit 1
+fi
+
 # Import the InfluxData repository key and add it to your system
 curl --silent --location -O \
 https://repos.influxdata.com/influxdata-archive.key \

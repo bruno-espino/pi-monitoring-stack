@@ -18,7 +18,7 @@ sudo systemctl enable influxdb
 sudo systemctl start influxdb 
 
 # influxdb setup, vars at config/telegraf
-curl http://$influx_server:$influx_port/api/v2/setup \
+curl http://localhost:$influx_port/api/v2/setup \
   --data "{
     \"username\": \"$user\",
     \"password\": \"$password\",
