@@ -30,13 +30,6 @@ else
     
     echo "Installing dependencies"
     sudo apt-get install -y wget gpg curl
-
-if [[ $admin_pwd_len -lt 10 ]]; then
-    echo "Admin password must have at least 8 chars"
-    exit 1
-else
-    source ./config/variables.sh
-
 fi
 
 show_menu() {
