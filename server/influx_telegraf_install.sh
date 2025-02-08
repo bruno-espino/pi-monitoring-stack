@@ -15,29 +15,21 @@ sudo apt-get update && sudo apt-get install -y telegraf influxdb2
 
 # Enable and start the influxdb service
 sudo systemctl enable influxdb 
-sudo systemctl start influxdb 
+sudo systemctl restart influxdb 
 
 # influxdb setup, vars at config/telegraf
-curl http://localhost:8086/api/v2/setup \
+curl http://localhost:$influx_port/api/v2/setup \
   --data "{
-    \"username\": \"$influx_user\",
-    \"password\": \"$influx_password\",
+    \"username\": \"$user\",
+    \"password\": \"$password\",
     \"token\": \"$influx_token\",
     \"bucket\": \"$influx_bucket\",
     \"org\": \"$influx_org\"
 }"
 
 # Copy telegraf configuration files
-sudo tee /etc/default/telegraf > /dev/null <<EOF
-influx_user=$influx_user
-influx_password=$influx_password
-influx_token=$influx_token
-influx_bucket=$influx_bucket
-influx_org=$influx_org
-influx_url=localhost:8086
-EOF
-sudo cp ./config/telegraf_server.conf /etc/telegraf/telegraf.conf
+sudo bash -c "source ./config/variables.sh && export influx_server=localhost && envsubst < ./config/telegraf.conf > /etc/telegraf/telegraf.conf"
 
 # Start and enable telegraf service
 sudo systemctl enable telegraf
-sudo systemctl start telegraf
+sudo systemctl restart telegraf

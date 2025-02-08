@@ -7,7 +7,7 @@ sudo mkdir -p /etc/apt/keyrings/
 wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
 
 # Add stable releases repo
-echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
 
 # Updates the list of available packages
 sudo apt-get update
@@ -25,7 +25,7 @@ datasources:
     access: proxy
     orgId: 1
     uid: 10001
-    url: http://localhost:8086
+    url: http://localhost:$influx_port
     jsonData:
       version: Flux
       organization: $influx_org
@@ -40,7 +40,11 @@ sudo cp ./server/pi_provider.yaml  /etc/grafana/provisioning/dashboards/pi_provi
 sudo mkdir -p /var/lib/grafana/dashboards
 sudo cp ./server/pi_metrics.json  /var/lib/grafana/dashboards/pi_metrics.json
 
-# Start and enable grafana service
 sudo systemctl daemon-reload
 sudo systemctl enable grafana-server
-sudo systemctl start grafana-server
+
+sudo sed -i "/admin_user/s/.*/admin_user = $user/" /etc/grafana/grafana.ini
+sudo sed -i "/http_port/s/.*/http_port = $grafana_port/" /etc/grafana/grafana.ini
+sudo sed -i "/default_home_dashboard_path/s/.*/default_home_dashboard_path = \/var\/lib\/grafana\/dashboards\/pi_metrics.json/" /etc/grafana/grafana.ini
+
+sudo systemctl restart grafana-server
